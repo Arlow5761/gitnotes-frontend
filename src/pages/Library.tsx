@@ -60,7 +60,7 @@ export function Library() {
               <h2 className="font-display font-semibold text-lg text-text-primary">Diakses Sebelumnya</h2>
               <button className="text-sm text-mauve-soft hover:text-mauve-magic">Lihat semua →</button>
             </div>
-            <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2 snap-x snap-mandatory -mx-6 px-6">
+            <div className="flex gap-4 overflow-x-auto no-scrollbar py-4 snap-x snap-mandatory">
               {recent.map(n => {
                 const author = userById(n.authorId);
                 return (

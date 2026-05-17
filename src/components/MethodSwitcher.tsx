@@ -1,21 +1,19 @@
 import { NavLink } from 'react-router';
-import { FileImage, FileInput, FileType2 } from 'lucide-react';
+import { ScanLine, FileType2 } from 'lucide-react';
 
 const items = [
-  { to: '/upload?mode=scan', label: 'Scan Catatan', icon: FileImage, match: '/upload' },
-  { to: '/upload?mode=import', label: 'Import Dokumen', icon: FileInput, match: '/upload' },
-  { to: '/templates', label: 'Pilih Template', icon: FileType2, match: '/templates' },
+  { to: '/upload', label: 'Scan Catatan', icon: ScanLine, match: 'scan' as const },
+  { to: '/templates', label: 'Pilih Template', icon: FileType2, match: 'template' as const },
 ];
 
-export function MethodSwitcher({ active }: { active: 'scan' | 'import' | 'template' }) {
-  const activeTo = active === 'scan' ? '/upload?mode=scan' : active === 'import' ? '/upload?mode=import' : '/templates';
+export function MethodSwitcher({ active }: { active: 'scan' | 'template' }) {
   return (
     <div className="mb-8">
       <div className="text-xs font-medium text-text-muted uppercase tracking-wider mb-3">Mulai dengan</div>
       <div className="inline-flex p-1 rounded-xl card-surface gap-1">
         {items.map(it => {
           const Icon = it.icon;
-          const isActive = it.to === activeTo;
+          const isActive = it.match === active;
           return (
             <NavLink
               key={it.to}
