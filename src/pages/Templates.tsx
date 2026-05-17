@@ -4,6 +4,7 @@ import { Header } from '../components/layout/Header';
 import { Btn } from '../components/ui/Btn';
 import { Search, Check } from 'lucide-react';
 import { mockTemplates, type Template } from '../data/mock';
+import { MethodSwitcher } from '../components/MethodSwitcher';
 
 export function Templates() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export function Templates() {
       } />
 
       <main className="max-w-[1280px] mx-auto px-6 py-10">
+        <MethodSwitcher active="template" />
         <div className="mb-8">
           <h1 className="font-display font-bold text-4xl text-text-primary">Pilih Template</h1>
           <p className="text-text-secondary mt-2">Mulai dengan template yang sesuai kebutuhanmu.</p>

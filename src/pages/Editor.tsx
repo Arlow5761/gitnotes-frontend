@@ -21,12 +21,23 @@ export function Editor() {
   const editorRef = useRef<HTMLDivElement>(null);
   const [toolbar, setToolbar] = useState<{ x: number; y: number } | null>(null);
 
+  // Initialize editor content imperatively ONCE so subsequent re-renders
+  // (autosave indicator, etc.) never wipe what the user typed.
+  useEffect(() => {
+    if (!editorRef.current) return;
+    if (editorRef.current.innerHTML.trim() !== '') return;
+    editorRef.current.innerHTML = id
+      ? '<p>Catatan ini sudah berisi konten contoh. Klik dan mulai mengubah...</p><h2>Bab 1: Pengenalan</h2><p>Sistem operasi adalah perangkat lunak yang mengelola sumber daya komputer dan menyediakan layanan umum untuk program komputer.</p>'
+      : '<p><br/></p>';
+  }, [id]);
+
+  // Debounced autosave indicator. Does NOT touch editor DOM.
   useEffect(() => {
     if (saved) return;
     setSaving(true);
-    const t = setTimeout(() => { setSaving(false); setSaved(true); }, 700);
+    const t = setTimeout(() => { setSaving(false); setSaved(true); }, 800);
     return () => clearTimeout(t);
-  }, [title, saved]);
+  }, [saved]);
 
   const exec = (cmd: string, val?: string) => {
     document.execCommand(cmd, false, val);
@@ -115,11 +126,6 @@ export function Editor() {
           onKeyUp={handleSelection}
           className="prose-reader min-h-[400px] outline-none"
           style={{ caretColor: '#c77dff' }}
-          dangerouslySetInnerHTML={{
-            __html: id
-              ? '<p>Catatan ini sudah berisi konten contoh. Klik dan mulai mengubah...</p><h2>Bab 1: Pengenalan</h2><p>Sistem operasi adalah perangkat lunak yang mengelola sumber daya komputer dan menyediakan layanan umum untuk program komputer.</p>'
-              : '<p><br/></p>',
-          }}
         />
 
         {toolbar && (

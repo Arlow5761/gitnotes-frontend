@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router';
 import { Header } from '../components/layout/Header';
 import { Btn } from '../components/ui/Btn';
@@ -6,17 +6,17 @@ import { VisibilityBadge } from '../components/ui/Badges';
 import { Modal } from '../components/ui/Modal';
 import {
   Search, FolderPlus, Plus, Folder, FileText, ChevronRight,
-  Pencil, Trash2, ChevronDown, FileImage, FileInput, FileType2,
+  Pencil, Trash2, ChevronDown, UploadCloud, FileType2,
   Home, ChevronLeft, ChevronRight as ChevronRightArrow,
 } from 'lucide-react';
-import { mockNotes, mockFolders, folderColors, folderById, userById } from '../data/mock';
+import { mockNotes, mockFolders, folderColors, folderById, userById, type Folder as FolderT } from '../data/mock';
 
 export function Library() {
   const navigate = useNavigate();
   const { folderId } = useParams();
   const currentFolder = folderById(folderId);
   const [openNew, setOpenNew] = useState(false);
-  const [newFolderModal, setNewFolderModal] = useState(false);
+  const [folderModal, setFolderModal] = useState<{ open: boolean; folder?: FolderT }>({ open: false });
 
   const folders = useMemo(() => mockFolders.filter(f => (f.parent ?? null) === (folderId ?? null)), [folderId]);
   const notes = useMemo(() => mockNotes.filter(n => (n.folderId ?? null) === (folderId ?? null)), [folderId]);
@@ -98,8 +98,7 @@ export function Library() {
                 <div className="absolute right-0 mt-2 w-56 glass rounded-xl shadow-2xl z-20 overflow-hidden anim-fade-up">
                   {[
                     { icon: FileText, label: 'Catatan Kosong', to: '/editor' },
-                    { icon: FileImage, label: 'Upload Scan', to: '/upload-scan' },
-                    { icon: FileInput, label: 'Import File', to: '/import' },
+                    { icon: UploadCloud, label: 'Upload File / Scan', to: '/upload' },
                     { icon: FileType2, label: 'Pilih Template', to: '/templates' },
                   ].map(it => (
                     <button
@@ -115,7 +114,7 @@ export function Library() {
               </>
             )}
           </div>
-          <Btn variant="secondary" onClick={() => setNewFolderModal(true)}>
+          <Btn variant="secondary" onClick={() => setFolderModal({ open: true })}>
             <FolderPlus size={15} /> Folder Baru
           </Btn>
         </div>
@@ -123,7 +122,7 @@ export function Library() {
         {/* List */}
         <div className="rounded-2xl card-surface overflow-hidden">
           {folders.map(f => (
-            <FolderRow key={f.id} folder={f} onClick={() => navigate(`/folder/${f.id}`)} />
+            <FolderRow key={f.id} folder={f} onOpen={() => navigate(`/folder/${f.id}`)} onEdit={() => setFolderModal({ open: true, folder: f })} />
           ))}
           {notes.map(n => (
             <NoteRow key={n.id} note={n} onClick={() => navigate(n.visibility === 'public' ? `/note/${n.id}` : `/my-note/${n.id}`)} />
@@ -136,15 +135,19 @@ export function Library() {
         <Pagination />
       </main>
 
-      <NewFolderModal open={newFolderModal} onClose={() => setNewFolderModal(false)} />
+      <FolderFormModal
+        open={folderModal.open}
+        folder={folderModal.folder}
+        onClose={() => setFolderModal({ open: false })}
+      />
     </div>
   );
 }
 
-function FolderRow({ folder, onClick }: { folder: typeof mockFolders[0]; onClick: () => void }) {
+function FolderRow({ folder, onOpen, onEdit }: { folder: typeof mockFolders[0]; onOpen: () => void; onEdit: () => void }) {
   return (
     <div
-      onClick={onClick}
+      onClick={onOpen}
       className="group flex items-center gap-4 px-5 py-4 border-b border-white/5 hover:bg-indigo-velvet/20 cursor-pointer transition-colors"
     >
       <div
@@ -158,7 +161,11 @@ function FolderRow({ folder, onClick }: { folder: typeof mockFolders[0]; onClick
         <div className="text-xs text-text-muted mt-0.5">{folder.count} catatan</div>
       </div>
       <div className="opacity-0 group-hover:opacity-100 flex items-center gap-1 transition-opacity">
-        <button className="p-2 rounded-lg hover:bg-white/10 text-text-secondary" aria-label="Edit" onClick={(e) => e.stopPropagation()}>
+        <button
+          className="p-2 rounded-lg hover:bg-white/10 text-text-secondary hover:text-mauve-soft transition-colors"
+          aria-label="Edit folder"
+          onClick={(e) => { e.stopPropagation(); onEdit(); }}
+        >
           <Pencil size={15} />
         </button>
         <button className="p-2 rounded-lg hover:bg-danger/20 text-text-secondary hover:text-danger" aria-label="Hapus" onClick={(e) => e.stopPropagation()}>
@@ -220,15 +227,31 @@ function Pagination() {
   );
 }
 
-function NewFolderModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [name, setName] = useState('');
-  const [color, setColor] = useState(folderColors[5]);
+function FolderFormModal({ open, onClose, folder }: { open: boolean; onClose: () => void; folder?: FolderT }) {
+  const isEdit = !!folder;
+  const [name, setName] = useState(folder?.name ?? '');
+  const [color, setColor] = useState<string>(folder?.color ?? folderColors[5]);
+
+  useEffect(() => {
+    if (open) {
+      setName(folder?.name ?? '');
+      setColor(folder?.color ?? folderColors[5]);
+    }
+  }, [open, folder]);
+
   return (
-    <Modal open={open} onClose={onClose} title="Folder Baru"
+    <Modal open={open} onClose={onClose} title={isEdit ? 'Edit Folder' : 'Folder Baru'} subtitle={isEdit ? `Mengubah "${folder!.name}"` : undefined}
       footer={
         <div className="flex gap-2">
+          {isEdit && (
+            <Btn variant="danger" onClick={onClose}>
+              <Trash2 size={14} /> Hapus
+            </Btn>
+          )}
           <Btn variant="secondary" className="flex-1" onClick={onClose}>Batal</Btn>
-          <Btn className="flex-1" onClick={onClose} disabled={!name.trim()}>Buat Folder</Btn>
+          <Btn className="flex-1" onClick={onClose} disabled={!name.trim()}>
+            {isEdit ? 'Simpan Perubahan' : 'Buat Folder'}
+          </Btn>
         </div>
       }>
       <div className="space-y-5">

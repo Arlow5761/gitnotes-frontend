@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { Library } from './pages/Library';
 import { Editor } from './pages/Editor';
-import { UploadScan } from './pages/UploadScan';
+import { Upload } from './pages/Upload';
 import { Templates } from './pages/Templates';
-import { Import } from './pages/Import';
 import { SearchPage } from './pages/Search';
 import { NoteDetail } from './pages/NoteDetail';
 import { MyNoteDetail } from './pages/MyNoteDetail';
@@ -20,9 +19,10 @@ export default function App() {
         <Route path="/folder/:folderId" element={<Library />} />
         <Route path="/editor" element={<Editor />} />
         <Route path="/editor/:id" element={<Editor />} />
-        <Route path="/upload-scan" element={<UploadScan />} />
+        <Route path="/upload" element={<Upload />} />
+        <Route path="/upload-scan" element={<Upload />} />
+        <Route path="/import" element={<Upload />} />
         <Route path="/templates" element={<Templates />} />
-        <Route path="/import" element={<Import />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/note/:id" element={<NoteDetail />} />
         <Route path="/my-note/:id" element={<MyNoteDetail />} />
