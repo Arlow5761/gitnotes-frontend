@@ -131,7 +131,7 @@ export default function OrganisasiCatatan() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-background text-foreground px-6 py-5 font-sans">
+    <div className="min-h-screen w-full bg-background text-foreground px-3 py-4 sm:px-6 sm:py-5 font-sans">
       {/* Top bar */}
       <div className="flex items-center justify-end mb-5">
         <button
@@ -144,7 +144,9 @@ export default function OrganisasiCatatan() {
       </div>
 
       {/* Title */}
-      <h1 className="text-2xl font-extrabold mb-4 text-foreground tracking-tight">Organisasi Catatan</h1>
+      <h1 className="text-xl sm:text-2xl font-extrabold mb-4 text-foreground tracking-tight">
+        Organisasi Catatan
+      </h1>
 
       {/* Search */}
       <div className="relative mb-6">
@@ -173,18 +175,18 @@ export default function OrganisasiCatatan() {
           <button
             onClick={() => setCardOffset((o) => Math.max(0, o - 1))}
             disabled={cardOffset === 0}
-            className="border border-border rounded p-1 disabled:opacity-30 hover:bg-muted text-foreground"
+            className="hidden sm:inline-flex border border-border rounded p-1 disabled:opacity-30 hover:bg-muted text-foreground"
           >
             <ChevronLeft size={14} />
           </button>
 
-          <div className="flex gap-3 flex-1 overflow-hidden">
+          <div className="flex gap-3 flex-1 overflow-x-auto sm:overflow-hidden pb-1">
             {recentCards
               .slice(cardOffset, cardOffset + VISIBLE_CARDS)
               .map((card) => (
                 <div
                   key={card.id}
-                  className="flex-1 min-w-0 border border-border rounded p-2 flex flex-col items-center text-center cursor-pointer hover:bg-muted"
+                  className="min-w-[132px] sm:min-w-0 sm:flex-1 border border-border rounded p-2 flex flex-col items-center text-center cursor-pointer hover:bg-muted"
                 >
                   <div className="w-full aspect-[4/3] bg-muted rounded mb-2 flex items-center justify-center">
                     <FileText size={20} className="text-muted-foreground" />
@@ -203,7 +205,7 @@ export default function OrganisasiCatatan() {
           <button
             onClick={() => setCardOffset((o) => Math.min(maxCardOffset, o + 1))}
             disabled={cardOffset >= maxCardOffset}
-            className="border border-border rounded p-1 disabled:opacity-30 hover:bg-muted text-foreground"
+            className="hidden sm:inline-flex border border-border rounded p-1 disabled:opacity-30 hover:bg-muted text-foreground"
           >
             <ChevronRight size={14} />
           </button>
@@ -213,13 +215,13 @@ export default function OrganisasiCatatan() {
       {/* Note List */}
       <section>
         {/* Header */}
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
           <h2 className="text-sm font-medium text-muted-foreground">Daftar Catatan</h2>
-          <div className="flex gap-2 relative">
+          <div className="flex flex-wrap gap-2 relative">
             <div className="relative" ref={addMenuRef}>
               <button
                 onClick={() => setAddMenuOpen((o) => !o)}
-                className="flex items-center gap-1 border border-border rounded px-3 py-1 text-sm text-foreground hover:bg-muted"
+                className="flex items-center gap-1 border border-border rounded px-3 py-1 text-sm text-foreground hover:bg-muted whitespace-nowrap"
               >
                 <Plus size={13} />
                 Catatan
@@ -241,7 +243,7 @@ export default function OrganisasiCatatan() {
 
             <button
               onClick={() => setFolderModalOpen(true)}
-              className="flex items-center gap-1 border border-border rounded px-3 py-1 text-sm text-foreground hover:bg-muted"
+              className="flex items-center gap-1 border border-border rounded px-3 py-1 text-sm text-foreground hover:bg-muted whitespace-nowrap"
             >
               <Plus size={13} />
               Folder
@@ -254,7 +256,7 @@ export default function OrganisasiCatatan() {
           {currentItems.map((item) => (
             <div
               key={item.id}
-              className="flex items-center gap-3 border border-border rounded px-3 py-2 bg-card text-card-foreground"
+              className="flex items-center gap-2 sm:gap-3 border border-border rounded px-2.5 sm:px-3 py-2 bg-card text-card-foreground"
             >
               <input
                 type="checkbox"
@@ -270,13 +272,13 @@ export default function OrganisasiCatatan() {
                 <p className="text-xs text-muted-foreground">{item.date}</p>
               </div>
               {item.type === "note" && (
-                <button className="text-muted-foreground hover:text-foreground shrink-0">
+                <button className="text-muted-foreground hover:text-foreground shrink-0 p-1">
                   <Pencil size={14} />
                 </button>
               )}
               <button
                 onClick={() => removeItem(item.id)}
-                className="text-muted-foreground hover:text-destructive shrink-0"
+                className="text-muted-foreground hover:text-destructive shrink-0 p-1"
               >
                 <Minus size={14} />
               </button>
@@ -314,7 +316,7 @@ export default function OrganisasiCatatan() {
 
       {folderModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-4">
-          <div className="w-full max-w-md rounded-lg border border-border bg-card text-card-foreground p-5 shadow-xl">
+          <div className="w-full max-w-md rounded-lg border border-border bg-card text-card-foreground p-4 sm:p-5 shadow-xl">
             <h3 className="text-lg font-bold mb-2">Buat Folder</h3>
             <p className="text-sm text-muted-foreground mb-3">
               Masukkan nama folder baru.
@@ -330,20 +332,20 @@ export default function OrganisasiCatatan() {
               placeholder="Nama folder"
               className="w-full border border-input rounded px-3 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
             />
-            <div className="mt-4 flex justify-end gap-2">
+            <div className="mt-4 flex flex-col-reverse sm:flex-row justify-end gap-2">
               <button
                 onClick={() => {
                   setFolderModalOpen(false);
                   setFolderName("");
                 }}
-                className="px-3 py-1.5 text-sm rounded border border-border hover:bg-muted"
+                className="px-3 py-1.5 text-sm rounded border border-border hover:bg-muted w-full sm:w-auto"
               >
                 Cancel
               </button>
               <button
                 onClick={createFolder}
                 disabled={!folderName.trim()}
-                className="px-3 py-1.5 text-sm rounded bg-primary text-primary-foreground disabled:opacity-50 hover:opacity-90"
+                className="px-3 py-1.5 text-sm rounded bg-primary text-primary-foreground disabled:opacity-50 hover:opacity-90 w-full sm:w-auto"
               >
                 Accept
               </button>
