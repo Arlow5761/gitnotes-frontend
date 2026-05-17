@@ -28,7 +28,6 @@ export function MyNoteDetail() {
       <Header
         back
         backTo="/"
-        maxWidth="720px"
         right={
           <>
             {uploaded ? (
@@ -44,7 +43,8 @@ export function MyNoteDetail() {
         }
       />
 
-      <article className="max-w-[720px] mx-auto px-6 py-12 relative">
+      <main className="max-w-[1280px] mx-auto px-6 py-12">
+      <article className="max-w-[720px] mx-auto relative">
         {/* Breadcrumb folder */}
         <div className="flex items-center gap-1.5 text-sm text-text-muted mb-6 flex-wrap">
           <Link to="/" className="hover:text-text-primary flex items-center gap-1"><Home size={13} /> Beranda</Link>
@@ -108,6 +108,7 @@ export function MyNoteDetail() {
           <Btn onClick={() => navigate(`/upload/${note.id}`)} className="!h-11"><Upload size={14} /> Unggah</Btn>
         </div>
       </article>
+      </main>
 
       <LabelModal open={labelOpen} onClose={() => setLabelOpen(false)} noteTitle={note.title} initialLabels={note.tags} />
       <VisibilityModal open={visOpen} onClose={() => setVisOpen(false)} noteTitle={note.title} current={visibility} onSave={setVisibility} />

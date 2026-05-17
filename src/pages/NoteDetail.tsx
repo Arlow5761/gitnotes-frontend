@@ -17,8 +17,9 @@ export function NoteDetail() {
 
   return (
     <div className="min-h-screen">
-      <Header back backTo="/search" minimal maxWidth="720px" />
-      <article className="max-w-[720px] mx-auto px-6 py-12 relative">
+      <Header back backTo="/search" minimal />
+      <main className="max-w-[1280px] mx-auto px-6 py-12">
+      <article className="max-w-[720px] mx-auto relative">
         {/* Floating action sidebar */}
         <div className="hidden lg:flex absolute -left-20 top-32 flex-col gap-1 sticky-actions">
           <FloatBtn onClick={() => setRatingOpen(true)} icon={<Star size={18} />} label="Rating" />
@@ -90,6 +91,7 @@ export function NoteDetail() {
           </div>
         </div>
       </article>
+      </main>
 
       <RatingModal open={ratingOpen} onClose={() => setRatingOpen(false)} noteTitle={note.title} />
     </div>

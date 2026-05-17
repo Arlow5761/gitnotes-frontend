@@ -61,8 +61,8 @@ export function Upload() {
 
   return (
     <div className="min-h-screen">
-      <Header back backTo="/" title="Scan Catatan" maxWidth="920px" />
-      <main className="max-w-[920px] mx-auto px-6 py-10">
+      <Header back backTo="/" title="Scan Catatan" />
+      <main className="max-w-[1280px] mx-auto px-6 py-10">
         <MethodSwitcher active="scan" />
 
         <div className="mb-8">

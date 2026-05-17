@@ -65,7 +65,6 @@ export function Editor() {
       <Header
         back
         backTo="/"
-        maxWidth="720px"
         right={
           <>
             <span className="text-xs text-text-muted hidden sm:inline mr-2">
@@ -84,7 +83,8 @@ export function Editor() {
         }
       />
 
-      <main className="max-w-[720px] mx-auto px-6 py-12">
+      <main className="max-w-[1280px] mx-auto px-6 py-12">
+       <div className="max-w-[720px] mx-auto">
         {info && !dismissed && (
           <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full bg-indigo-velvet/30 border border-mauve-magic/30 text-xs text-mauve-soft anim-fade-up">
             {info.icon}
@@ -143,6 +143,7 @@ export function Editor() {
             <ToolBtn onClick={() => { const url = prompt('URL?'); if (url) exec('createLink', url); }} icon={<LinkIcon size={14} />} label="Link" mini />
           </div>
         )}
+       </div>
       </main>
     </div>
   );

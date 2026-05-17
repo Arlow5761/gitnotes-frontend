@@ -19,12 +19,13 @@ export function MoveToFolder() {
 
   return (
     <div className="min-h-screen">
-      <Header back maxWidth="720px" right={
+      <Header back right={
         <Btn onClick={() => navigate(`/my-note/${noteId}`)} disabled={!selected}>
           Pindahkan →
         </Btn>
       } />
-      <main className="max-w-[720px] mx-auto px-6 py-10">
+      <main className="max-w-[1280px] mx-auto px-6 py-10">
+       <div className="max-w-[720px] mx-auto">
         <div className="mb-1 text-xs text-text-muted truncate">{note.title}</div>
         <h1 className="font-display font-bold text-3xl text-text-primary mb-6">Pindahkan ke Folder</h1>
 
@@ -89,6 +90,7 @@ export function MoveToFolder() {
             </div>
           ))}
         </div>
+       </div>
       </main>
     </div>
   );

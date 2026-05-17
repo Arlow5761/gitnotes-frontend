@@ -27,8 +27,9 @@ export function SearchPage() {
 
   return (
     <div className="min-h-screen">
-      <Header back backTo="/" title="Cari Catatan" maxWidth="1024px" />
-      <main className="max-w-[1024px] mx-auto px-6 py-8">
+      <Header back backTo="/" title="Cari Catatan" />
+      <main className="max-w-[1280px] mx-auto px-6 py-8">
+       <div className="max-w-[1024px] mx-auto">
         {/* Tab switch */}
         <div className="relative mb-6 p-1 rounded-2xl bg-amethyst-800/60 border border-white/10 flex">
           <button
@@ -105,6 +106,7 @@ export function SearchPage() {
             <PublicRow key={n.id} note={n} onOpen={() => navigate(`/note/${n.id}`)} />
           ))}
         </div>
+       </div>
       </main>
 
       <AddFilterModal

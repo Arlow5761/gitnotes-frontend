@@ -22,8 +22,9 @@ export function UploadNote() {
   if (success) {
     return (
       <div className="min-h-screen">
-        <Header back backTo={`/my-note/${noteId}`} maxWidth="600px" />
-        <main className="max-w-[600px] mx-auto px-6 py-24 text-center anim-fade-up">
+        <Header back backTo={`/my-note/${noteId}`} />
+        <main className="max-w-[1280px] mx-auto px-6 py-24">
+         <div className="max-w-[600px] mx-auto text-center anim-fade-up">
           <div className="w-24 h-24 mx-auto mb-6 rounded-full gradient-primary grid place-items-center glow-purple">
             <Check size={48} className="text-white" strokeWidth={2.5} />
           </div>
@@ -39,6 +40,7 @@ export function UploadNote() {
             <Btn variant="secondary" onClick={() => navigate(`/my-note/${noteId}`)}>Kembali ke Catatan</Btn>
             <Btn onClick={() => navigate(`/note/${noteId}`)}>Lihat Halaman Publik →</Btn>
           </div>
+         </div>
         </main>
       </div>
     );
@@ -46,8 +48,9 @@ export function UploadNote() {
 
   return (
     <div className="min-h-screen">
-      <Header back backTo={`/my-note/${noteId}`} title="Unggah ke GitNotes" maxWidth="1100px" />
-      <main className="max-w-[1100px] mx-auto px-6 py-10">
+      <Header back backTo={`/my-note/${noteId}`} title="Unggah ke GitNotes" />
+      <main className="max-w-[1280px] mx-auto px-6 py-10">
+       <div className="max-w-[1100px] mx-auto">
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8">
           {/* Preview */}
           <div className="card-surface rounded-2xl p-8">
@@ -111,6 +114,7 @@ export function UploadNote() {
             </p>
           </div>
         </div>
+       </div>
       </main>
 
       <VisibilityModal open={visOpen} onClose={() => setVisOpen(false)} noteTitle={note.title} current={visibility} onSave={setVisibility} />

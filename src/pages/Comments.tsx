@@ -14,14 +14,15 @@ export function Comments() {
 
   return (
     <div className="min-h-screen">
-      <Header back title={note.title} maxWidth="720px" right={
+      <Header back title={note.title} right={
         note.visibility === 'public' && (
           <Btn size="sm" onClick={() => navigate(`/comment/${note.id}`)}>
             <MessageSquarePlus size={14} /> Buat Komentar
           </Btn>
         )
       } />
-      <main className="max-w-[720px] mx-auto px-6 py-10">
+      <main className="max-w-[1280px] mx-auto px-6 py-10">
+        <div className="max-w-[720px] mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h1 className="font-display font-bold text-2xl text-text-primary">
             Komentar <span className="text-text-muted">({total})</span>
@@ -59,6 +60,7 @@ export function Comments() {
             Belum ada komentar. Jadilah yang pertama berkomentar!
           </div>
         )}
+        </div>
       </main>
     </div>
   );

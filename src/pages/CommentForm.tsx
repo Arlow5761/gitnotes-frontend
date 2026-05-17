@@ -18,8 +18,9 @@ export function CommentForm() {
 
   return (
     <div className="min-h-screen">
-      <Header back title={note.title} maxWidth="720px" />
-      <main className="max-w-[720px] mx-auto px-6 py-10">
+      <Header back title={note.title} />
+      <main className="max-w-[1280px] mx-auto px-6 py-10">
+        <div className="max-w-[720px] mx-auto">
         <div className="mb-6">
           <div className="text-xs text-text-muted uppercase tracking-wider mb-2">Tulis Komentar untuk</div>
           <h1 className="font-display font-bold text-2xl text-text-primary">{note.title}</h1>
@@ -44,6 +45,7 @@ export function CommentForm() {
           <Btn disabled={!text.trim()} onClick={() => navigate(`/comments/${noteId}`)}>
             <Send size={14} /> Kirim Komentar
           </Btn>
+        </div>
         </div>
       </main>
     </div>
