@@ -16,23 +16,24 @@ export function Templates() {
 
   return (
     <div className="min-h-screen pb-32">
-      <Header back backTo="/" right={
-        <div className="relative">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Cari template..."
-            className="focus-ring h-9 w-56 pl-9 pr-3 rounded-lg bg-white/5 border border-white/10 text-sm placeholder:text-text-muted"
-          />
-        </div>
-      } />
+      <Header back backTo="/" title="Pilih Template" />
 
       <main className="max-w-[1280px] mx-auto px-6 py-10">
         <MethodSwitcher active="template" />
-        <div className="mb-8">
-          <h1 className="font-display font-bold text-4xl text-text-primary">Pilih Template</h1>
-          <p className="text-text-secondary mt-2">Mulai dengan template yang sesuai kebutuhanmu.</p>
+        <div className="mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <h1 className="font-display font-bold text-4xl text-text-primary">Pilih Template</h1>
+            <p className="text-text-secondary mt-2">Mulai dengan template yang sesuai kebutuhanmu.</p>
+          </div>
+          <div className="relative w-full md:w-80 shrink-0">
+            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Cari template..."
+              className="focus-ring w-full h-11 pl-11 pr-3 rounded-xl bg-amethyst-800/50 border border-white/10 text-sm text-text-primary placeholder:text-text-muted"
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
