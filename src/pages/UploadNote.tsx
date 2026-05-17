@@ -22,7 +22,7 @@ export function UploadNote() {
   if (success) {
     return (
       <div className="min-h-screen">
-        <Header back backTo={`/my-note/${noteId}`} />
+        <Header back backTo={`/my-note/${noteId}`} maxWidth="600px" />
         <main className="max-w-[600px] mx-auto px-6 py-24 text-center anim-fade-up">
           <div className="w-24 h-24 mx-auto mb-6 rounded-full gradient-primary grid place-items-center glow-purple">
             <Check size={48} className="text-white" strokeWidth={2.5} />
@@ -46,7 +46,7 @@ export function UploadNote() {
 
   return (
     <div className="min-h-screen">
-      <Header back backTo={`/my-note/${noteId}`} title="Unggah ke GitNotes" />
+      <Header back backTo={`/my-note/${noteId}`} title="Unggah ke GitNotes" maxWidth="1100px" />
       <main className="max-w-[1100px] mx-auto px-6 py-10">
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-8">
           {/* Preview */}

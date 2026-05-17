@@ -9,13 +9,14 @@ interface HeaderProps {
   title?: string;
   right?: React.ReactNode;
   minimal?: boolean;
+  maxWidth?: string;
 }
 
-export function Header({ back, backTo, title, right, minimal }: HeaderProps) {
+export function Header({ back, backTo, title, right, minimal, maxWidth = '1280px' }: HeaderProps) {
   const navigate = useNavigate();
   return (
     <header className="sticky top-0 z-40 glass">
-      <div className="max-w-[1280px] mx-auto px-6 h-16 flex items-center gap-4">
+      <div className="mx-auto px-6 h-16 flex items-center gap-4" style={{ maxWidth }}>
         {back ? (
           <button
             onClick={() => backTo ? navigate(backTo) : navigate(-1)}

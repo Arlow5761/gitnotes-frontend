@@ -19,7 +19,7 @@ export function MoveToFolder() {
 
   return (
     <div className="min-h-screen">
-      <Header back right={
+      <Header back maxWidth="720px" right={
         <Btn onClick={() => navigate(`/my-note/${noteId}`)} disabled={!selected}>
           Pindahkan →
         </Btn>

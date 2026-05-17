@@ -14,7 +14,7 @@ export function Comments() {
 
   return (
     <div className="min-h-screen">
-      <Header back title={note.title} right={
+      <Header back title={note.title} maxWidth="720px" right={
         note.visibility === 'public' && (
           <Btn size="sm" onClick={() => navigate(`/comment/${note.id}`)}>
             <MessageSquarePlus size={14} /> Buat Komentar

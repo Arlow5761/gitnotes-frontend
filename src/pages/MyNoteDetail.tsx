@@ -28,6 +28,7 @@ export function MyNoteDetail() {
       <Header
         back
         backTo="/"
+        maxWidth="720px"
         right={
           <>
             {uploaded ? (

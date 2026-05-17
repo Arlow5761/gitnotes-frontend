@@ -18,7 +18,7 @@ export function CommentForm() {
 
   return (
     <div className="min-h-screen">
-      <Header back title={note.title} />
+      <Header back title={note.title} maxWidth="720px" />
       <main className="max-w-[720px] mx-auto px-6 py-10">
         <div className="mb-6">
           <div className="text-xs text-text-muted uppercase tracking-wider mb-2">Tulis Komentar untuk</div>

@@ -65,6 +65,7 @@ export function Editor() {
       <Header
         back
         backTo="/"
+        maxWidth="720px"
         right={
           <>
             <span className="text-xs text-text-muted hidden sm:inline mr-2">

@@ -27,7 +27,7 @@ export function SearchPage() {
 
   return (
     <div className="min-h-screen">
-      <Header back backTo="/" title="Cari Catatan" />
+      <Header back backTo="/" title="Cari Catatan" maxWidth="1024px" />
       <main className="max-w-[1024px] mx-auto px-6 py-8">
         {/* Tab switch */}
         <div className="relative mb-6 p-1 rounded-2xl bg-amethyst-800/60 border border-white/10 flex">
