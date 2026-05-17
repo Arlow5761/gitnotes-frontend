@@ -26,7 +26,7 @@ export function Modal({ open, onClose, title, subtitle, children, footer, width 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center p-4 anim-backdrop" style={{ background: 'rgba(16, 0, 43, 0.72)', backdropFilter: 'blur(8px)' }}>
+    <div className="fixed inset-0 z-50 grid place-items-center p-4 anim-backdrop bg-amethyst-900/70 backdrop-blur-md">
       <div className="absolute inset-0" onClick={onClose} aria-hidden />
       <div className={`relative w-full ${width} card-surface rounded-2xl shadow-2xl anim-modal glow-purple-sm`}>
         {(title || subtitle) && (

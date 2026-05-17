@@ -1,6 +1,7 @@
 import { Link, NavLink, useNavigate } from 'react-router';
 import { ArrowLeft, Search, Library, Bell } from 'lucide-react';
 import { currentUser } from '../../data/mock';
+import { ThemeToggle } from '../ui/ThemeToggle';
 
 interface HeaderProps {
   back?: boolean;
@@ -50,6 +51,8 @@ export function Header({ back, backTo, title, right, minimal }: HeaderProps) {
         <div className="flex-1" />
 
         {right}
+
+        <ThemeToggle />
 
         {!minimal && (
           <>

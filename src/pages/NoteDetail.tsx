@@ -22,7 +22,7 @@ export function NoteDetail() {
         {/* Floating action sidebar */}
         <div className="hidden lg:flex absolute -left-20 top-32 flex-col gap-1 sticky-actions">
           <FloatBtn onClick={() => setRatingOpen(true)} icon={<Star size={18} />} label="Rating" />
-          <FloatBtn icon={<Bookmark size={18} />} label="Simpan" />
+          <FloatBtn onClick={() => navigate(`/move/${note.id}`)} icon={<Bookmark size={18} />} label="Simpan ke Koleksi" />
           <FloatBtn onClick={() => navigate(`/comments/${note.id}`)} icon={<MessageSquare size={18} />} label="Komentar" badge={commentCount} />
           <FloatBtn icon={<Share2 size={18} />} label="Share" />
         </div>
@@ -54,7 +54,7 @@ export function NoteDetail() {
         {/* Sticky action bar mobile */}
         <div className="lg:hidden sticky bottom-4 mt-12 glass rounded-2xl p-2 flex items-center justify-around">
           <FloatBtn onClick={() => setRatingOpen(true)} icon={<Star size={18} />} label="Rating" inline />
-          <FloatBtn icon={<Bookmark size={18} />} label="Simpan" inline />
+          <FloatBtn onClick={() => navigate(`/move/${note.id}`)} icon={<Bookmark size={18} />} label="Simpan" inline />
           <FloatBtn onClick={() => navigate(`/comments/${note.id}`)} icon={<MessageSquare size={18} />} label="Komentar" inline />
           <FloatBtn icon={<Share2 size={18} />} label="Share" inline />
         </div>

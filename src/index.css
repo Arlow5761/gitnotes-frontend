@@ -2,18 +2,22 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ============================================================
+   Theme tokens — Tailwind utility names stay the same, but
+   resolve to CSS variables that swap between dark / light.
+   ============================================================ */
 @theme {
-  --color-amethyst-900: #10002b;
-  --color-amethyst-800: #240046;
-  --color-indigo-ink: #3c096c;
-  --color-indigo-velvet: #5a189a;
-  --color-royal-violet: #7b2cbf;
-  --color-lavender-purple: #9d4edd;
-  --color-mauve-magic: #c77dff;
-  --color-mauve-soft: #e0aaff;
-  --color-text-primary: #f5f0ff;
-  --color-text-secondary: #c4b5d9;
-  --color-text-muted: #8b7aa8;
+  --color-amethyst-900: var(--c-bg);
+  --color-amethyst-800: var(--c-surface);
+  --color-indigo-ink: var(--c-border);
+  --color-indigo-velvet: var(--c-accent-soft);
+  --color-royal-violet: var(--c-primary);
+  --color-lavender-purple: var(--c-primary-2);
+  --color-mauve-magic: var(--c-accent);
+  --color-mauve-soft: var(--c-accent-strong);
+  --color-text-primary: var(--c-fg);
+  --color-text-secondary: var(--c-fg-muted);
+  --color-text-muted: var(--c-fg-subtle);
   --color-success: #4ade80;
   --color-warning: #fbbf24;
   --color-danger: #f87171;
@@ -24,69 +28,128 @@
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
-:root {
+/* Dark mode — default */
+:root,
+:root.dark {
   color-scheme: dark;
+  --c-bg: #1a1427;
+  --c-surface: #241c35;
+  --c-surface-2: #2a203d;
+  --c-surface-3: #312646;
+  --c-border: #3d3251;
+  --c-accent-soft: #3a2d56;
+  --c-primary: #aa94d6;
+  --c-primary-2: #9f89c9;
+  --c-accent: #c77dff;
+  --c-accent-strong: #ddd4ee;
+  --c-fg: #e9e3f5;
+  --c-fg-muted: #b9aecf;
+  --c-fg-subtle: #8b7aa8;
+
+  --c-glass: rgba(36, 28, 53, 0.7);
+  --c-card-bg: rgba(36, 28, 53, 0.6);
+  --c-row-hover: rgba(58, 45, 86, 0.55);
+  --c-ring-shadow: rgba(199, 125, 255, 0.35);
+  --c-grad-1: #7b2cbf;
+  --c-grad-2: #9d4edd;
+  --c-body-grad-1: rgba(123, 44, 191, 0.25);
+  --c-body-grad-2: rgba(157, 78, 221, 0.15);
+  --c-scrollbar-thumb: #3d3251;
+  --c-scrollbar-thumb-hover: #5a189a;
+}
+
+/* Light mode */
+:root.light {
+  color-scheme: light;
+  --c-bg: #faf7ff;
+  --c-surface: #ffffff;
+  --c-surface-2: #f3e8ff;
+  --c-surface-3: #ebdcfb;
+  --c-border: #e0aaff;
+  --c-accent-soft: #f3e8ff;
+  --c-primary: #7b2cbf;
+  --c-primary-2: #9d4edd;
+  --c-accent: #7b2cbf;
+  --c-accent-strong: #5a189a;
+  --c-fg: #10002b;
+  --c-fg-muted: #5a189a;
+  --c-fg-subtle: #8b7aa8;
+
+  --c-glass: rgba(255, 255, 255, 0.75);
+  --c-card-bg: rgba(255, 255, 255, 0.95);
+  --c-row-hover: rgba(243, 232, 255, 0.85);
+  --c-ring-shadow: rgba(123, 44, 191, 0.35);
+  --c-grad-1: #7b2cbf;
+  --c-grad-2: #9d4edd;
+  --c-body-grad-1: rgba(199, 125, 255, 0.25);
+  --c-body-grad-2: rgba(224, 170, 255, 0.35);
+  --c-scrollbar-thumb: #e0aaff;
+  --c-scrollbar-thumb-hover: #c77dff;
 }
 
 html, body, #root {
   min-height: 100vh;
-  background-color: #10002b;
-  color: #f5f0ff;
+  background-color: var(--c-bg);
+  color: var(--c-fg);
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(123, 44, 191, 0.25), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 90% 110%, rgba(157, 78, 221, 0.15), transparent 60%),
-    #10002b;
+    radial-gradient(ellipse 80% 50% at 50% -10%, var(--c-body-grad-1), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 110%, var(--c-body-grad-2), transparent 60%),
+    var(--c-bg);
   background-attachment: fixed;
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #10002b; }
-::-webkit-scrollbar-thumb { background: #3c096c; border-radius: 8px; }
-::-webkit-scrollbar-thumb:hover { background: #5a189a; }
-::selection { background: rgba(199, 125, 255, 0.35); color: #fff; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--c-scrollbar-thumb); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--c-scrollbar-thumb-hover); }
+::selection { background: var(--c-ring-shadow); color: var(--c-fg); }
 
 .glow-purple {
-  box-shadow: 0 0 24px rgba(199, 125, 255, 0.35), 0 0 60px rgba(123, 44, 191, 0.25);
+  box-shadow: 0 0 24px var(--c-ring-shadow), 0 0 60px color-mix(in srgb, var(--c-grad-1) 25%, transparent);
 }
-.glow-purple-sm { box-shadow: 0 0 14px rgba(199, 125, 255, 0.25); }
+.glow-purple-sm { box-shadow: 0 0 14px var(--c-ring-shadow); }
 
 .gradient-primary {
-  background: linear-gradient(135deg, #7b2cbf 0%, #9d4edd 100%);
+  background: linear-gradient(135deg, var(--c-grad-1) 0%, var(--c-grad-2) 100%);
+  color: #ffffff;
 }
 .gradient-primary:hover {
-  background: linear-gradient(135deg, #8a3bd0 0%, #ac5deb 100%);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--c-grad-1) 90%, white) 0%,
+    color-mix(in srgb, var(--c-grad-2) 90%, white) 100%);
 }
 
 .glass {
-  background: rgba(36, 0, 70, 0.6);
+  background: var(--c-glass);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(157, 78, 221, 0.18);
+  border: 1px solid var(--c-border);
 }
 
 .card-surface {
-  background: rgba(36, 0, 70, 0.55);
-  border: 1px solid rgba(157, 78, 221, 0.15);
+  background: var(--c-card-bg);
+  border: 1px solid var(--c-border);
 }
 
 .card-hover { transition: all 0.25s ease; }
 .card-hover:hover {
-  background: rgba(60, 9, 108, 0.55);
-  border-color: rgba(199, 125, 255, 0.35);
+  background: var(--c-row-hover);
+  border-color: var(--c-accent);
   transform: translateY(-2px);
-  box-shadow: 0 10px 40px -10px rgba(199, 125, 255, 0.3);
+  box-shadow: 0 10px 40px -10px var(--c-ring-shadow);
 }
 
 input, textarea, button { font-family: inherit; }
 
 .focus-ring:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #10002b, 0 0 0 4px #c77dff;
+  box-shadow: 0 0 0 2px var(--c-bg), 0 0 0 4px var(--c-accent);
 }
 
 @keyframes modalIn {
@@ -106,29 +169,28 @@ input, textarea, button { font-family: inherit; }
   font-family: 'Lora', Georgia, serif;
   font-size: 19px;
   line-height: 1.78;
-  color: #e8e0f5;
+  color: var(--c-fg);
 }
-.prose-reader h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.75rem; font-weight: 700; color: #f5f0ff; margin-top: 2.2em; margin-bottom: 0.6em; }
-.prose-reader h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 600; color: #f5f0ff; margin-top: 1.8em; margin-bottom: 0.5em; }
+.prose-reader h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.75rem; font-weight: 700; color: var(--c-fg); margin-top: 2.2em; margin-bottom: 0.6em; }
+.prose-reader h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 600; color: var(--c-fg); margin-top: 1.8em; margin-bottom: 0.5em; }
 .prose-reader p { margin-bottom: 1.4em; }
 .prose-reader blockquote {
-  border-left: 3px solid #c77dff;
+  border-left: 3px solid var(--c-accent);
   padding-left: 1.2em;
   margin: 1.6em 0;
   font-style: italic;
-  color: #c4b5d9;
+  color: var(--c-fg-muted);
 }
 .prose-reader ul, .prose-reader ol { margin: 1em 0 1.4em 1.4em; list-style: revert; }
 .prose-reader li { margin-bottom: 0.4em; }
 .prose-reader code {
   font-family: 'JetBrains Mono', monospace;
-  background: rgba(60, 9, 108, 0.6);
+  background: var(--c-surface-2);
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.9em;
 }
-.prose-reader strong { color: #f5f0ff; font-weight: 600; }
+.prose-reader strong { color: var(--c-fg); font-weight: 600; }
 
-/* hide scrollbar for horizontal scroll */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
