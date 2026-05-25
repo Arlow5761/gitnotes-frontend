@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Library } from './pages/Library';
 import { Editor } from './pages/Editor';
 import { Upload } from './pages/Upload';
@@ -13,7 +13,7 @@ import { MoveToFolder } from './pages/MoveToFolder';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Library />} />
         <Route path="/folder/:folderId" element={<Library />} />
@@ -31,6 +31,6 @@ export default function App() {
         <Route path="/comment/:noteId" element={<CommentForm />} />
         <Route path="/move/:noteId" element={<MoveToFolder />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
