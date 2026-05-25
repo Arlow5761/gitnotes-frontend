@@ -29,7 +29,7 @@ export function Header({ back, backTo, title, right, minimal }: HeaderProps) {
             <div className="w-8 h-8 rounded-lg gradient-primary grid place-items-center font-display font-bold text-white text-sm glow-purple-sm">
               G
             </div>
-            <span className="font-display font-bold text-lg text-text-primary tracking-tight">
+            <span className="hidden md:block font-display font-bold text-lg text-text-primary tracking-tight">
               Git<span className="text-mauve-magic">Notes</span>
             </span>
           </Link>
@@ -42,7 +42,7 @@ export function Header({ back, backTo, title, right, minimal }: HeaderProps) {
         )}
 
         {!title && !minimal && (
-          <nav className="hidden md:flex items-center gap-1 ml-6">
+          <nav className="flex items-center gap-1 ml-6">
             <NavItem to="/" icon={<Library size={16} />}>Beranda</NavItem>
             <NavItem to="/search" icon={<Search size={16} />}>Cari</NavItem>
           </nav>
